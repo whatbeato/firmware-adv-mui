@@ -66,8 +66,11 @@
 #define HAS_GPS 1
 #define GPS_BAUDRATE 115200
 
-// audio codec ES8311
+// audio codec ES8311. The device-ui build has no DMA-capable heap left for the legacy
+// I2S driver, and ESP-IDF panics inside its own failure path, so leave it out of that one.
+#ifndef MESHTASTIC_EXCLUDE_I2S_AUDIO
 #define HAS_I2S
+#endif
 #define DAC_I2S_BCK 41
 #define DAC_I2S_WS 43
 #define DAC_I2S_DOUT 42
